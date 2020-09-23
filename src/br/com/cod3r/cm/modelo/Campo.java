@@ -40,4 +40,24 @@ class Campo {
 		}
 	}
 	
+	void alternarMarcacao() {
+		if(!aberto) {
+			marcado = !marcado;
+		}
+	}
+	
+	boolean abrir() {
+		
+		if(!aberto && !marcado) {
+			aberto = true;
+			
+			if(minado) {
+				
+			}
+		}
+		return false;
+	}
+	
+	
+	
 }
