@@ -6,6 +6,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import br.com.cod3r.cm.excessao.ExplosaoException;
+import junit.framework.Assert;
 
 public class CampoTeste {
 
@@ -134,5 +135,38 @@ public class CampoTeste {
 		assertTrue(campo22.isAberto() && campo11.isFechado());
 	}
 	
+	@Test
+	void testeReiniciarPartida() {
+		Campo campo11 = new Campo(1, 1);
+		Campo campo12 = new Campo(1, 1);
+		campo12.minar();
+		
+		Campo campo22 = new Campo(2, 2);
+		campo22.adicionarVizinho(campo11);
+		campo22.adicionarVizinho(campo12);
+		
+		campo.adicionarVizinho(campo22);
+		campo.abrir();
+		campo.reiniciar();
+		
+		assertTrue(campo.isFechado());
+		assertFalse(campo12.isMarcado());
+	}
+	
+	@Test
+	void testeString() {
+		Campo campo11 = new Campo(1, 1);
+		Campo campo12 = new Campo(1, 1);
+		campo12.minar();
+		
+		Campo campo22 = new Campo(2, 2);
+		campo22.adicionarVizinho(campo11);
+		campo22.adicionarVizinho(campo12);
+		
+		campo.adicionarVizinho(campo22);
+		campo.abrir();
+		
+		
+	}
 	
 }
