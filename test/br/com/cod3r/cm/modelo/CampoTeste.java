@@ -1,12 +1,10 @@
 package br.com.cod3r.cm.modelo;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import br.com.cod3r.cm.excessao.ExplosaoException;
-import junit.framework.Assert;
 
 public class CampoTeste {
 
@@ -95,14 +93,6 @@ public class CampoTeste {
 		assertFalse(campo.abrir());
 	}
 	
-	@Test
-	void testeAbrirMinadoNaoMarcado() {
-		campo.minar();
-		
-		assertThrows(ExplosaoException.class, () -> {
-			assertFalse(campo.abrir());			
-		});	
-	}
 	
 	@Test
 	void testeAbrirCComVizinhos1() {
@@ -165,8 +155,55 @@ public class CampoTeste {
 		
 		campo.adicionarVizinho(campo22);
 		campo.abrir();
-		
-		
 	}
+	
+	@Test
+	void testeTabuleiroPerdeu() {
+
+		Tabuleiro tabuleiro = new Tabuleiro(3, 3, 9);
+		
+		tabuleiro.registrarObservador(e -> {
+			if(e.isGanhou()) {
+				System.out.println("ganhou");
+			} else {
+				System.out.println("Perdeu");
+			}
+		});
+		
+		tabuleiro.alternarMarcacao(0, 0);
+		tabuleiro.alternarMarcacao(0, 1);
+		tabuleiro.alternarMarcacao(0, 2);
+		tabuleiro.alternarMarcacao(1, 0);
+		tabuleiro.alternarMarcacao(1, 1);
+		tabuleiro.alternarMarcacao(1, 2);
+		tabuleiro.alternarMarcacao(2, 0);
+		tabuleiro.alternarMarcacao(2, 1);
+		tabuleiro.abrir(2, 2);
+	}
+	
+	@Test
+	void testeTabuleiroGanhou() {
+
+		Tabuleiro tabuleiro = new Tabuleiro(3, 3, 9);
+		
+		tabuleiro.registrarObservador(e -> {
+			if(e.isGanhou()) {
+				System.out.println("ganhou");
+			} else {
+				System.out.println("Perdeu");
+			}
+		});
+		
+		tabuleiro.alternarMarcacao(0, 0);
+		tabuleiro.alternarMarcacao(0, 1);
+		tabuleiro.alternarMarcacao(0, 2);
+		tabuleiro.alternarMarcacao(1, 0);
+		tabuleiro.alternarMarcacao(1, 1);
+		tabuleiro.alternarMarcacao(1, 2);
+		tabuleiro.alternarMarcacao(2, 0);
+		tabuleiro.alternarMarcacao(2, 1);
+		tabuleiro.alternarMarcacao(2, 2);
+	}
+	
 	
 }
